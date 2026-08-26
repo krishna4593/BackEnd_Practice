@@ -1,105 +1,282 @@
+// const NotesModel = require("../models/NotesSchema");
+
+// const createNotesController=async(req,res)=>{
+//     const{title, description}= req.body;
+
+//     try{
+//         const notes =await NotesModel.create({title,description})
+//     res.status(201).json({
+//         success:true,
+//         message:"notes created successfully",
+//         notes
+//      })
+//     }
+//     catch(e){
+//         res.status(500).json({
+//             success:false,
+//             message:e.message,
+//          })
+//     }
+// }
+
+// const getAllNotesController= async(req,res)=>{
+//  try{
+//        const notes = await NotesModel.find()
+//        res.status(200).json({
+//         success:true,
+//         message:"notes fetched successfully",
+//         notes
+//        })
+//  }
+//  catch(e){
+//     res.status(500).json({
+//         success:false,
+//         message:e.message
+//     })
+//  }
+    
+// }
+
+// const getNoteController= async(req,res)=>{
+//     try{
+//         const id = req.params._id
+//     const note = await NotesModel.findById(id,{ new: true })
+//     res.status(200).json({
+//         success:true,
+//         message:"note fetched successfully",
+//         note
+//     })
+//     }catch(e){
+//         res.status(500).json({
+//             success:false,
+//             message:e.message
+//         })
+//     }
+
+
+// }
+
+
+// const updateNoteController= async(req,res)=>{
+//     try{
+//         const body= req.body
+//         const id = req.params._id
+//     const note = await NotesModel.findByIdAndUpdate(id, body,{ new: true })
+//     res.status(200).json({
+//         success:true,
+//         message:"note updated successfully",
+//         note
+//     })
+//     }catch(e){
+//         res.status(500).json({
+//             success:false,
+//             message:e.message
+//         })
+//     }
+
+
+// }
+
+// const updateSingleNoteController= async(req,res)=>{
+//     try{
+//         const body= req.body
+//         const id = req.params._id
+//     const note = await NotesModel.findByIdAndUpdate(id, body,{ new: true })
+//     res.status(200).json({
+//         success:true,
+//         message:"note updated successfully",
+//         note
+//     })
+//     }catch(e){
+//         res.status(500).json({
+//             success:false,
+//             message:e.message
+//         })
+//     }
+
+
+// }
+
+// const deleteNoteController= async(req,res)=>{
+//     try{
+//         const body= req.body
+//         const id = req.params._id
+//     const note = await NotesModel.findByIdAndDelete(id,{ new: true })
+//     res.status(200).json({
+//         success:true,
+//         message:"note deleted successfully",
+//         note
+//     })
+//     }catch(e){
+//         res.status(500).json({
+//             success:false,
+//             message:e.message
+//         })
+//     }
+
+
+// }
+
+// module.exports={
+//     createNotesController,
+//     getAllNotesController,
+//     getNoteController,
+//     updateNoteController,
+//     deleteNoteController,
+//     updateSingleNoteController
+// }
+
 const NotesModel = require("../models/NotesSchema");
 
-const createNotesController=async(req,res)=>{
-    const{title, description}= req.body;
 
-    try{
-        const notes =await NotesModel.create({title,description})
-    res.status(201).json({
-        success:true,
-        message:"notes created successfully",
-        notes
-     })
-    }
-    catch(e){
+// CREATE NOTE
+const createNotesController = async (req, res) => {
+    const { title, description } = req.body;
+
+    try {
+        const notes = await NotesModel.create({
+            title,
+            description
+        });
+
+        res.status(201).json({
+            success: true,
+            message: "notes created successfully",
+            notes
+        });
+
+    } catch (e) {
         res.status(500).json({
-            success:false,
-            message:e.message,
-         })
+            success: false,
+            message: e.message
+        });
     }
-}
+};
 
-const getAllNotesController= async(req,res)=>{
- try{
-       const notes = await NotesModel.find()
-       res.status(200).json({
-        success:true,
-        message:"notes fetched successfully",
-        notes
-       })
- }
- catch(e){
-    res.status(500).json({
-        success:false,
-        message:e.message
-    })
- }
-    
-}
 
-const getNoteController= async(req,res)=>{
-    try{
-        const id = req.params._id
-    const note = await NotesModel.findById(id,{ new: true })
-    res.status(200).json({
-        success:true,
-        message:"note fetched successfully",
-        note
-    })
-    }catch(e){
+// GET ALL NOTES
+const getAllNotesController = async (req, res) => {
+    try {
+        const notes = await NotesModel.find();
+
+        res.status(200).json({
+            success: true,
+            message: "notes fetched successfully",
+            notes
+        });
+
+    } catch (e) {
         res.status(500).json({
-            success:false,
-            message:e.message
-        })
+            success: false,
+            message: e.message
+        });
     }
+};
 
 
-}
+// GET SINGLE NOTE
+const getNoteController = async (req, res) => {
+    try {
+        const id = req.params.id;
 
+        const note = await NotesModel.findById(id);
 
-const updateNoteController= async(req,res)=>{
-    try{
-        const body= req.body
-        const id = req.params._id
-    const note = await NotesModel.findByIdAndUpdate(id, body,{ new: true })
-    res.status(200).json({
-        success:true,
-        message:"note updated successfully",
-        note
-    })
-    }catch(e){
+        res.status(200).json({
+            success: true,
+            message: "note fetched successfully",
+            note
+        });
+
+    } catch (e) {
         res.status(500).json({
-            success:false,
-            message:e.message
-        })
+            success: false,
+            message: e.message
+        });
     }
+};
 
 
-}
-const deleteNoteController= async(req,res)=>{
-    try{
-        const body= req.body
-        const id = req.params._id
-    const note = await NotesModel.findByIdAndDelete(id,{ new: true })
-    res.status(200).json({
-        success:true,
-        message:"note deleted successfully",
-        note
-    })
-    }catch(e){
+// UPDATE NOTE
+const updateNoteController = async (req, res) => {
+    try {
+        const body = req.body;
+        const id = req.params.id;
+
+        const note = await NotesModel.findByIdAndUpdate(
+            id,
+            body,
+            { new: true }
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "note updated successfully",
+            note
+        });
+
+    } catch (e) {
         res.status(500).json({
-            success:false,
-            message:e.message
-        })
+            success: false,
+            message: e.message
+        });
     }
+};
 
 
-}
+// UPDATE SINGLE NOTE
+const updateSingleNoteController = async (req, res) => {
+    try {
+        const body = req.body;
+        const id = req.params.id;
 
-module.exports={
+        const note = await NotesModel.findByIdAndUpdate(
+            id,
+            body,
+            { new: true }
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "note updated successfully",
+            note
+        });
+
+    } catch (e) {
+        res.status(500).json({
+            success: false,
+            message: e.message
+        });
+    }
+};
+
+
+// DELETE NOTE
+const deleteNoteController = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const note = await NotesModel.findByIdAndDelete(id);
+
+        res.status(200).json({
+            success: true,
+            message: "note deleted successfully",
+            note
+        });
+
+    } catch (e) {
+        res.status(500).json({
+            success: false,
+            message: e.message
+        });
+    }
+};
+
+
+module.exports = {
     createNotesController,
     getAllNotesController,
     getNoteController,
     updateNoteController,
-    deleteNoteController
-}
+    deleteNoteController,
+    updateSingleNoteController
+};
